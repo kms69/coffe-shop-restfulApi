@@ -18,6 +18,11 @@ class CreateOrderDetailsTable extends Migration
             $table->bigInteger('price');
             $table->integer('quantity');
             $table->enum('order_status', ['waiting', 'preparation', 'ready','delivered']);
+            $table->enum('size', ['small', 'medium', 'large']);
+            $table->enum('milk', ['skim', 'semi', 'whole']);
+            $table->enum('shots', ['single', 'double', 'triple']);
+            $table->enum('kind', ['chocolate chip', 'ginger']);
+            $table->enum('location', ['take away', 'in shop']);
             $table->timestamps();
             $table->foreignId('order_id')->constrained()->onUpdate('cascade')
                 ->onDelete('cascade');

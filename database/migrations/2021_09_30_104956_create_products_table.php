@@ -16,10 +16,16 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->enum('size', ['small', 'medium', 'large']);
+            $table->enum('milk', ['skim', 'semi', 'whole']);
+            $table->enum('shots', ['single', 'double', 'triple']);
+            $table->enum('kind', ['chocolate chip', 'ginger']);
+            $table->enum('location', ['take away', 'in shop']);
+
             $table->bigInteger('price');
             $table->timestamps();
-            $table->foreignId('category_id')->constrained()->onUpdate('cascade')
-                ->onDelete('cascade');
+
+
 
 
         });

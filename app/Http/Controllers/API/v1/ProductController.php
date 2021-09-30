@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\v1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Middleware\IsAdmin;
 use App\Http\Requests\StoreProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -12,17 +13,36 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products =Product::paginate(10);
-        return view('admin.products.index', compact('products'));
+        Product::paginate(10);
+
     }
+
     public function store(StoreProductRequest $request)
     {
-        $attribute = array_merge($request->validated(), [Auth::user()->'role' == 'admin');
+        $attribute = $request->validated();
         Product::create($attribute);
         return response()->json([
             'message' => 'post has been saved'
         ], 200);
 
+    }
+
+    public function update(StoreProductRequest $request)
+    {
+        $attribute = $request->validated();
+        Product::update($attribute);
+        return response()->json([
+            'message' => 'product has been updated'
+        ], 201);
+
+    }
+
+    public function destroy(Product $product)
+    {
+        $product->delete();
+        return response()->json([
+            'message' => 'product has been deleted'
+        ], 200);
     }
 
 }

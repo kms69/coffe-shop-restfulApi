@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreProductRequest extends FormRequest
 {
@@ -24,10 +25,23 @@ class StoreProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=> 'required|string|max:50',
-            'price'=> 'required|bigInteger',
-            'category_id'=> ['exists:categories,id']
-
-        ];
+            'name' => 'required|string|max:50',
+            'price' => 'required|bigInteger',
+            'category_id' => ['exists:categories,id'],
+            'size' => [
+                Rule::in(['small', 'medium', 'large']),
+                'milk' => [
+                    'required',
+                    Rule::in(['skim', 'semi', 'whole']),
+                    'kind' => [
+                        'required',
+                        Rule::in(['chocolate chip', 'ginger', ]),
+                    ],
+                    'location' => [
+                        'required',
+                        Rule::in(['takeaway ', 'in shop', ]),
+                    ],
+]]
+                ];
     }
 }
