@@ -43,6 +43,10 @@ class User extends Authenticatable
     ];
     public function user_role()
     {
-        return $this->hasMany(UserRole::class);
+        return $this->hasMany(User_Role::class);
+    }
+    public function order()
+    {
+        return $this->hasMany(Order::class);
     }
 }
