@@ -18,8 +18,7 @@ class CreateOrderDetailsTable extends Migration
             $table->bigInteger('price');
             $table->integer('quantity');
             $table->enum('order_status', ['waiting', 'preparation', 'ready','delivered']);
-            $table->timestamp('created_at');
-            $table->timestamp('updated_at');
+            $table->timestamps();
             $table->foreignId('order_id')->constrained()->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->foreignId('product_id')->constrained()->onUpdate('cascade')
