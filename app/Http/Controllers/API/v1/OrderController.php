@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    public function index()
+    public function index(Order $order)
     {
         Order::paginate(20);
 
@@ -40,6 +40,30 @@ class OrderController extends Controller
         }
         return response()->json([
             'message' => 'order cannot be changed in this status'
+        ], 401);
+    }
+    public function adminchangeStatus(ChangeOrderRequest $request, Order $order, Order_Detail $order_detail)
+    {
+
+            $attribute = $request->validated();
+            $order->update($attribute);
+            $order_detail::update($attribute);
+            return response()->json([
+                'message' => 'order status has been updated'
+            ], 200);
+        }
+    public function destroy(Order $order,Order_Detail $order_detail)
+    {
+        if ($order->status == waiting) {
+            $order->delete();
+            $order_detail->delete();
+
+            return response()->json([
+                'message' => 'post has been deleted',
+            ], 200);
+        }
+        return response()->json([
+            'message' => 'order cannot be deleted in this status'
         ], 401);
     }
 }
