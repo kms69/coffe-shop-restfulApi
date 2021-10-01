@@ -13,10 +13,10 @@ class Product extends Model
 
     public function orderDetails()
     {
-        return $this->hasMany(Order_Detail::class);
+        return $this->hasMany(Order_Detail::class,'product_id');
     }
     public function productattribute()
     {
-        return $this->hasMany(ProductAttribute::class, 'product_id'  );
+        return $this->hasMany(ProductAttribute::class,'product_id' );
     }
 }

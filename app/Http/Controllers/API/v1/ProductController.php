@@ -30,7 +30,7 @@ class ProductController extends Controller
 
     public function update(StoreProductRequest $request)
     {
-        $attribute = array_merge([$request->validated()][attributes()->sync($request->attributes, false)]);
+        $attribute = array_merge([$request->validated()],[attributes()->sync($request->attributes)]);
         Product::update($attribute);
         return response()->json([
             'message' => 'product has been updated'

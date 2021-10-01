@@ -14,8 +14,8 @@ class CreateProductsAttributesTable extends Migration
     public function up()
     {
         Schema::create('products_attributes', function (Blueprint $table) {
-            $table->foreignId('value_id')->constrained()->onUpdate('cascade')
-                ->onDelete('cascade');
+            $table->string('attribute_value')->nullable();
+            $table->timestamps();
             $table->foreignId('product_id')->constrained()->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->foreignId('attribute_id')->constrained()->onUpdate('cascade')
