@@ -27,21 +27,9 @@ class StoreProductRequest extends FormRequest
         return [
             'name' => 'required|string|max:50',
             'price' => 'required|bigInteger',
-            'category_id' => ['exists:categories,id'],
-            'size' => [
-                Rule::in(['small', 'medium', 'large']),
-                'milk' => [
-                    'required',
-                    Rule::in(['skim', 'semi', 'whole']),
-                    'kind' => [
-                        'required',
-                        Rule::in(['chocolate chip', 'ginger', ]),
-                    ],
-                    'location' => [
-                        'required',
-                        Rule::in(['takeaway ', 'in shop', ]),
-                    ],
-]]
+
+
+
                 ];
     }
 }
