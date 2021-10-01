@@ -41,9 +41,9 @@ class Orderstatus extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->line('update on your order')
+                    ->action('the  status of your has been changed ', url('/'))
+                    ->line('Thank you for your shakemake checkmate');
     }
 
     /**

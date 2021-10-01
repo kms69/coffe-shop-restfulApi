@@ -7,7 +7,10 @@ use App\Http\Requests\ChangeOrderRequest;
 use App\Http\Requests\StoreOrderRequest;
 use App\Models\Order;
 use App\Models\Order_Detail;
+use App\Models\User;
+use App\Notifications\Orderstatus;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Notification;
 
 class OrderController extends Controller
 {
@@ -42,15 +45,16 @@ class OrderController extends Controller
             'message' => 'order cannot be changed in this status'
         ], 401);
     }
-    public function adminchangeStatus(ChangeOrderRequest $request, Order $order, Order_Detail $order_detail)
+    public function adminchangeStatus(ChangeOrderRequest $request, Order $order, Order_Detail $order_detail,User $user)
     {
 
             $attribute = $request->validated();
             $order->update($attribute);
             $order_detail::update($attribute);
-            return response()->json([
-                'message' => 'order status has been updated'
-            ], 200);
+//            return response()->json([
+//                'message' => 'order status has been updated'
+//            ], 200);
+        Notification::send($user, new Orderstatus::class);
         }
     public function destroy(Order $order,Order_Detail $order_detail)
     {
