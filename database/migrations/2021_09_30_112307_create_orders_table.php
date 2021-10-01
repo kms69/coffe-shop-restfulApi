@@ -15,6 +15,8 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->BigInteger('order_number');
+            $table->integer('item_count');
             $table->enum('status', ['waiting', 'preparation', 'ready','delivered']);
             $table->timestamps();
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')
